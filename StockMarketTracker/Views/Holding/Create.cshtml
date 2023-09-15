@@ -1,0 +1,16 @@
+﻿@model Holding
+@using StockMarketTracker;
+@{
+    ViewData["Title"] = "Add Holding";
+}
+<form method="post">
+    <label asp-for="Shares" class="col-md-2 control-label"></label>
+    <input asp-for="Shares" class="form-control" />
+    <label asp-for="Ticker.Symbol" class="col-md-2 control-label"></label>
+    <input asp-for="Ticker.Symbol" class="form-control" />
+    <label asp-for="Average" class="col-md-2 control-label"></label>
+    <input asp-for="Average" class="form-control" />
+    @*<label asp-for="DateLastUpdated" class="col-md-2 control-label"></label>
+    <input asp-for="DateLastUpdated" class="form-control" />*@
+    <button asp-action="Create" asp-controller="Holding">Add</button>
+</form>

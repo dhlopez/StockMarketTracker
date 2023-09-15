@@ -1,0 +1,13 @@
+﻿@model Ticker
+@using StockMarketTracker;
+@{
+    ViewData["Title"] = "Edit Ticker";
+}
+<form asp-action="AddTicker" asp-controller="Ticker">
+    <label asp-for="Symbol" class="col-md-2 control-label"></label>
+    <input asp-for="Symbol" class="form-control" />
+    <label asp-for="Price" class="col-md-2 control-label"></label>
+    <input asp-for="Price" class="form-control" />
+    <label asp-for="DateLastUpdated" class="col-md-2 control-label"></label>
+    <input asp-for="DateLastUpdated" class="form-control" />
+</form>

@@ -1,0 +1,36 @@
+﻿@model List<Holding>
+
+
+<div>
+    <h3>WS Regular</h3>
+    <table class="table">
+        <tr>
+            <th>P&L</th>
+            <th>Shares</th>
+            <th>Ticker</th>
+            <th>Average</th>
+            <th>Current Price</th>
+            <th>P&L %</th>
+            <th>Goal: 5%</th>
+            <th>$ Invested</th>
+        </tr>
+    @{
+        foreach (var holding in Model)
+        {
+            <tr>
+                <td>@String.Format("{0:c}",((holding.Ticker.Price - holding.Average) * holding.Shares))</td>
+                <td>@holding.Shares</td>
+                <td>@holding.Ticker.Symbol</td>
+                <td>@String.Format("{0:c}",holding.Average)</td>
+                <td>@String.Format("{0:c}",holding.Ticker.Price)</td>
+                <td>@String.Format("{0:p}",(((holding.Ticker.Price - holding.Average) / holding.Average)))</td>
+                <td>@String.Format("{0:c}",(holding.Average * 1.05m))</td>
+                <td>@String.Format("{0:c}",(holding.Shares * holding.Average))</td>
+            </tr>
+        }
+    }
+    </table>    
+</div>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Holding" asp-action="Create">Add New Holding</a>
+</li>

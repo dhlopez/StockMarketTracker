@@ -1,0 +1,42 @@
+﻿@model List<Ticker>
+@using System.Reflection;
+@using StockMarketTracker;
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Ticker List</h1>
+<table class="table">
+    <tr>
+        <th>Ticker</th>
+        <th>Price</th>
+        <th>Price Last Updated</th>
+    </tr>
+    @{
+        foreach (Ticker ticker in Model)
+        {
+            <tr>
+                <td>@ticker.Symbol</td>
+                <td>@ticker.Price</td>
+                <td>@ticker.DateLastUpdated</td>
+                <td><a class="btn" asp-route-id=@ticker.Id asp-controller="Ticker" asp-action="Edit">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </a>
+                </td>
+                <td>
+                    <a class="btn" asp-route-id=@ticker.Id asp-controller="Ticker" asp-action="Delete" method="Post">
+                        <i class="fa-solid fa-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    }          
+    
+</table>
+
+<i class="fa-solid fa-user"></i>
+
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Ticker" asp-action="Create">Add New Ticker</a>
+</li>
+

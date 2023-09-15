@@ -1,0 +1,161 @@
+﻿@using System.Reflection;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    @*@{
+        foreach (KeyValuePair<string, TickerDetails> result in Model)
+        {
+            <p>@result.Key</p>
+            
+            <p>@result.Value.Open</p>
+            <p>@result.Value.Close</p>
+            <p>@result.Value.High</p>
+            <p>@result.Value.Low</p>
+            <p>@result.Value.Volume</p>
+
+        }
+    }*@
+
+    <div>
+        <h3>WS Regular</h3>
+        <table>
+            <tr>
+                <th>P&L</th>
+                <th>Shares</th>
+                <th>Ticker</th>
+                <th>Average</th>
+                <th>Current Price</th>
+                <th>P&L %</th>
+                <th>Goal: 5%</th>
+                <th>$ Invested</th>
+            </tr>
+            <tr>
+                <td>-1796.94</td>
+                <td>447</td>
+                <td>TNT</td>
+                <td>6.58</td>
+                <td>2.56</td>
+                <td>-61.09%</td>
+                <td>6.91</td>
+                <td>2,941.26</td>                
+            </tr>
+            <tr>
+                <td>-4,365.45</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h3>QS Margin</h3>
+        <table>
+            <tr>
+                <th>P&L</th>
+                <th>Shares</th>
+                <th>Ticker</th>
+                <th>Average</th>
+                <th>Current Price</th>
+                <th>P&L %</th>
+                <th>Goal: 5%</th>
+                <th>$ Invested</th>
+            </tr>
+            <tr>
+                <td>-1796.94</td>
+                <td>447</td>
+                <td>TNT</td>
+                <td>6.58</td>
+                <td>2.56</td>
+                <td>-61.09%</td>
+                <td>6.91</td>
+                <td>2,941.26</td>
+            </tr>
+            <tr>
+                <td>-4,365.45</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h3>WS TFSA</h3>
+        <table>
+            <tr>
+                <th>P&L</th>
+                <th>Shares</th>
+                <th>Ticker</th>
+                <th>Average</th>
+                <th>Current Price</th>
+                <th>P&L %</th>
+                <th>Goal: 5%</th>
+                <th>$ Invested</th>
+            </tr>
+            <tr>
+                <td>-1796.94</td>
+                <td>447</td>
+                <td>TNT</td>
+                <td>6.58</td>
+                <td>2.56</td>
+                <td>-61.09%</td>
+                <td>6.91</td>
+                <td>2,941.26</td>
+            </tr>
+            <tr>
+                <td>-4,365.45</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h3>QS TFSA</h3>
+        <table>
+            <tr>
+                <th>P&L</th>
+                <th>Shares</th>
+                <th>Ticker</th>
+                <th>Average</th>
+                <th>Current Price</th>
+                <th>P&L %</th>
+                <th>Goal: 5%</th>
+                <th>$ Invested</th>
+            </tr>
+            <tr>
+                <td>-1796.94</td>
+                <td>447</td>
+                <td>TNT</td>
+                <td>6.58</td>
+                <td>2.56</td>
+                <td>-61.09%</td>
+                <td>6.91</td>
+                <td>2,941.26</td>
+            </tr>
+            <tr>
+                <td>-4,365.45</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h3>Summary</h3>
+        <table>
+            <tr>
+                <th>Current CAD</th>
+                <th>Total P&L %</th>
+                <th>Invested</th>
+                <th>Max Per Ticker</th>
+                <th>1%</th>
+                <th>Goal 1M</th>
+            </tr>
+            <tr>
+                <td>-14,335.65</td>
+                <td>-19%</td>
+                <td>77,044.56</td>
+                <td>3,852.23</td>
+                <td>$770</td>
+                <td>6.8433%</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
