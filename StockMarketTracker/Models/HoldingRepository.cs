@@ -23,17 +23,19 @@ namespace StockMarketTracker.Models
 
         public List<Holding> GetAll()
         {
-            return stockMarketContext.Holdings.Include("Ticker").ToList();
+            return stockMarketContext.Holdings.Include(h => h.Ticker).ToList();
         }
 
         public Holding GetById(int id)
         {
-            throw new NotImplementedException();
+            return stockMarketContext.Holdings.Where(t => t.Id == id).Include(h => h.Ticker).First();
         }
 
         public void Update(Holding holding)
         {
-            throw new NotImplementedException();
+            stockMarketContext.Attach(holding).State = EntityState.Modified;
+            stockMarketContext.Holdings.Update(holding);
+            stockMarketContext.SaveChanges();
         }
     }
 }

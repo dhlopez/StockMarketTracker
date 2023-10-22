@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StockMarketTracker.Models;
+using System.Net;
 
 namespace StockMarketTracker.Controllers
 {
@@ -60,11 +61,40 @@ namespace StockMarketTracker.Controllers
             return View(ticker);
         }
 
-        [HttpPost, ActionName("Delete")]
-        public IActionResult Delete(int id)
+        [HttpPost]
+        public IActionResult Edit(Ticker ticker)
         {
-            tickerRepository.Delete(id);
+            if (ModelState.IsValid)
+            { 
+                tickerRepository.Update(ticker);
+            }
+
             return RedirectToAction("List");
+        }
+        
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            Ticker ticker = tickerRepository.GetById(id);
+
+            tickerRepository.Delete(ticker.Id);
+
+            return RedirectToAction("List");
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new BadRequestResult();
+            }
+            Ticker ticker = tickerRepository.GetById((int)id);
+            if (ticker == null)
+            {
+                return NotFound();
+            }
+            return View(ticker);
         }
     }
 }

@@ -10,5 +10,8 @@
     <input asp-for="Price" class="form-control" />
     @*<label asp-for="DateLastUpdated" class="col-md-2 control-label"></label>
     <input asp-for="DateLastUpdated" class="form-control" />*@
-    <button asp-action="Create" asp-controller="Ticker">Add</button>
+    <button asp-action="Create" asp-controller="Ticker"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+    @*<a class="btn" asp-controller="Ticker" asp-action="Create">
+        <i class="fa-solid fa-floppy-disk"></i> Save
+    </a>*@
 </form>

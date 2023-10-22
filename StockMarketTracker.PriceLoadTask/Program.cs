@@ -82,10 +82,29 @@ namespace StockMarketTracker.PriceLoadTask
                 RequestHandler requestHandler = new RequestHandler("CXCUIZFHI6FOM1C4", ticker.Symbol);
                 var tickerResults = await requestHandler.GetTickerDetailsAsync();
 
+                if (tickerResults.Count == 0)
+                {
+                    continue;
+                }
+
                 Console.WriteLine($"Setting received price for {ticker.Symbol} from external api");
-                ticker.Price = Decimal.Parse(tickerResults[DateTime.Now.ToString("yyyy-MM-dd")].Close);
+
+                var currentTime = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"));
+
+                if(currentTime.Hour >= 0 && currentTime.Hour <= 16)
+                    ticker.Price = Decimal.Parse(tickerResults[DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")].Close);
+
+                if (currentTime.Hour > 16 && currentTime.Hour < 23)
+                    ticker.Price = Decimal.Parse(tickerResults[DateTime.Now.ToString("yyyy-MM-dd")].Close);
+
+
                 ticker.DateLastUpdated = DateTime.Now;
                 //tickerResults.Where(t => t.Key.Equals(DateTime.Now.ToShortDateString())).Select(V));
+
+                /*
+                 if program runs before 4pm, use the previous date
+                if program runs after 4pm and before midnight use today
+                 */
 
                 databaseHelper.UpdateTicker(ticker);
                 Console.WriteLine($"All done for {ticker.Symbol}, moving to next symbol if any");

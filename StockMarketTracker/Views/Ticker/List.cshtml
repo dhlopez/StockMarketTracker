@@ -24,7 +24,7 @@
                     </a>
                 </td>
                 <td>
-                    <a class="btn" asp-route-id=@ticker.Id asp-controller="Ticker" asp-action="Delete" method="Post">
+                    <a class="btn" asp-route-id=@ticker.Id asp-controller="Ticker" asp-action="Delete">
                         <i class="fa-solid fa-trash"></i> Delete
                     </a>
                 </td>
@@ -34,9 +34,6 @@
     
 </table>
 
-<i class="fa-solid fa-user"></i>
-
-<li class="nav-item">
-    <a class="nav-link text-dark" asp-area="" asp-controller="Ticker" asp-action="Create">Add New Ticker</a>
-</li>
-
+<a class="btn" asp-controller="Ticker" asp-action="Create">
+    <i class="fa-solid fa-plus"></i> Add Ticker
+</a>

@@ -26,11 +26,22 @@
                 <td>@String.Format("{0:p}",(((holding.Ticker.Price - holding.Average) / holding.Average)))</td>
                 <td>@String.Format("{0:c}",(holding.Average * 1.05m))</td>
                 <td>@String.Format("{0:c}",(holding.Shares * holding.Average))</td>
+                    <td>
+                        <a class="btn" asp-route-id=@holding.Id asp-controller="Holding" asp-action="Edit">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn" asp-route-id=@holding.Id asp-controller="Holding" asp-action="Delete">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </a>
+                    </td>
             </tr>
         }
     }
     </table>    
 </div>
-<li class="nav-item">
-    <a class="nav-link text-dark" asp-area="" asp-controller="Holding" asp-action="Create">Add New Holding</a>
-</li>
+
+<a class="btn" asp-controller="Holding" asp-action="Create">
+    <i class="fa-solid fa-plus"></i> Add Holding
+</a>

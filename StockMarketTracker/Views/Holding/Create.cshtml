@@ -1,16 +1,20 @@
-﻿@model Holding
+﻿@model HoldingViewModel
 @using StockMarketTracker;
+@using StockMarketTracker.ViewModels;
 @{
     ViewData["Title"] = "Add Holding";
 }
 <form method="post">
-    <label asp-for="Shares" class="col-md-2 control-label"></label>
-    <input asp-for="Shares" class="form-control" />
-    <label asp-for="Ticker.Symbol" class="col-md-2 control-label"></label>
-    <input asp-for="Ticker.Symbol" class="form-control" />
-    <label asp-for="Average" class="col-md-2 control-label"></label>
-    <input asp-for="Average" class="form-control" />
+    <label asp-for="holding.Shares" class="col-md-2 control-label"></label>
+    <input asp-for="holding.Shares" class="form-control" />
+    <label class="form-label">Ticker:</label>
+    <select class="form-select" asp-items="Model.TickersSelectList" asp-for="SelectedTicker"></select>
+    @*<label asp-for="Ticker.Symbol" class="col-md-2 control-label"></label>
+    <input asp-for="Ticker.Symbol" class="form-control" />*@
+    <label asp-for="holding.Average" class="col-md-2 control-label"></label>
+    <input asp-for="holding.Average" class="form-control" />
     @*<label asp-for="DateLastUpdated" class="col-md-2 control-label"></label>
     <input asp-for="DateLastUpdated" class="form-control" />*@
-    <button asp-action="Create" asp-controller="Holding">Add</button>
+    @*<button asp-action="Create" asp-controller="Holding">Add</button>*@
+    <button asp-action="Create" asp-controller="Holding"><i class="fa-solid fa-floppy-disk"></i> Save</button>
 </form>

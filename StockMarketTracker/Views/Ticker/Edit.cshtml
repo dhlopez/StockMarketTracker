@@ -3,11 +3,16 @@
 @{
     ViewData["Title"] = "Edit Ticker";
 }
-<form asp-action="AddTicker" asp-controller="Ticker">
+<form method="Post"> @*asp-action="Edit" asp-controller="Ticker">*@
     <label asp-for="Symbol" class="col-md-2 control-label"></label>
     <input asp-for="Symbol" class="form-control" />
     <label asp-for="Price" class="col-md-2 control-label"></label>
     <input asp-for="Price" class="form-control" />
     <label asp-for="DateLastUpdated" class="col-md-2 control-label"></label>
     <input asp-for="DateLastUpdated" class="form-control" />
+    @*<button>Edit</button>*@
+    @*<a class="btn" asp-controller="Ticker" asp-action="Create">
+        <i class="fa-solid fa-floppy-disk"></i> Save
+    </a>*@
+    <button asp-action="Edit" asp-controller="Ticker"><i class="fa-solid fa-floppy-disk"></i> Save</button>
 </form>
