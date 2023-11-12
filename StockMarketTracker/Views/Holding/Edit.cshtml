@@ -7,8 +7,9 @@
 <form method="Post">@* asp-action="Edit" asp-controller="Holding">*@
     @*<label asp-for="Ticker.Symbol" class="col-md-2 control-label"></label>
     <input asp-for="Ticker.Symbol" class="form-control" />*@
-    <label class="form-label">Ticker:</label>
-    <select class="form-select" asp-items="Model.TickersSelectList" asp-for="SelectedTicker"></select>
+    <input type="hidden" asp-for="holding.Id" class="form-control" />
+    <label asp-for="holding.TickerId" class="form-label">Ticker:</label>
+    <select class="form-select" asp-items="Model.TickersSelectList" asp-for="holding.TickerId"></select>
     <label asp-for="holding.Shares" class="col-md-2 control-label"></label>
     <input asp-for="holding.Shares" class="form-control" />
     <label asp-for="holding.Average" class="col-md-2 control-label"></label>

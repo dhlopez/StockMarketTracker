@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using StockMarketTracker.Models;
 using StockMarketTracker.ViewModels;
+using System.Reflection.Metadata;
 
 namespace StockMarketTracker.Controllers
 {
@@ -60,19 +61,37 @@ namespace StockMarketTracker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(HoldingViewModel holdingViewModel)
+        public IActionResult Edit(Holding holding)
         {
-            string ticker = holdingViewModel.SelectedTicker;
+            //string ticker = holdingViewModel.SelectedTicker;
+
+            ModelState.Remove("holding.Ticker");
 
             if (!ModelState.IsValid)
             {
-                return View(holdingViewModel.holding);
-                
+                //return View(holding);
+                return RedirectToAction("Edit", new { Id = holding.Id });
             }
 
-            holdingRepository.Update(holdingViewModel.holding);
+            holdingRepository.Update(holding);
 
             return RedirectToAction("List");
         }
+
+        //[HttpPost]
+        //public IActionResult Edit(HoldingViewModel holdingViewModel)
+        //{
+        //    string ticker = holdingViewModel.SelectedTicker;
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(holdingViewModel.holding);
+
+        //    }
+
+        //    holdingRepository.Update(holdingViewModel.holding);
+
+        //    return RedirectToAction("List");
+        //}
     }
 }
