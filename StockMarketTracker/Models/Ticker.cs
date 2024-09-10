@@ -10,6 +10,8 @@ namespace StockMarketTracker
         [Column(TypeName = "decimal(18,2)")]
         public decimal? Price { get; set; }
 
+        public bool SkipPriceUpdate { get; set; }
+
         public DateTime? DateLastUpdated
         {
             get
