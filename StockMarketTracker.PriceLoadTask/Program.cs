@@ -63,6 +63,8 @@ namespace StockMarketTracker.PriceLoadTask
 
         private async static void OnTimedEventAsync(Object source, ElapsedEventArgs e)
         {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            bool excludeCanadianTickers = true;
             Console.WriteLine("Starting pulse at {0:HH:mm:ss.fff}",e.SignalTime);
 
             //have tickers with empty price in database, empty last updated, or last updated > 1 hour
@@ -73,7 +75,7 @@ namespace StockMarketTracker.PriceLoadTask
 
             //var json = new HttpClient().GetStringAsync("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=L.TO&apikey=CXCUIZFHI6FOM1C4");
             Console.WriteLine("Starting tickers to update retrieval from local db");
-            var tickersToUpdate = databaseHelper.GetTickerList();
+            var tickersToUpdate = databaseHelper.GetTickerList(excludeCanadianTickers);
 
             Console.WriteLine($"Found {tickersToUpdate.Count} tickers, if > 0 starting external api call");
             foreach (var ticker in tickersToUpdate)
@@ -91,10 +93,15 @@ namespace StockMarketTracker.PriceLoadTask
 
                 var currentTime = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"));
 
-                if(currentTime.Hour >= 0 && currentTime.Hour <= 16)
+                //if Saturday or day is not over use previous day
+                if(DateTime.Now.DayOfWeek == DayOfWeek.Saturday || (currentTime.Hour >= 0 && currentTime.Hour <= 16))
                     ticker.Price = Decimal.Parse(tickerResults[DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")].Close);
 
-                if (currentTime.Hour > 16 && currentTime.Hour < 23)
+                else if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+                    ticker.Price = Decimal.Parse(tickerResults[DateTime.Now.AddDays(-2).ToString("yyyy-MM-dd")].Close);
+
+                //use today's close if market is clsoed
+                else if ((currentTime.Hour > 16 && currentTime.Hour < 23))
                     ticker.Price = Decimal.Parse(tickerResults[DateTime.Now.ToString("yyyy-MM-dd")].Close);
 
 

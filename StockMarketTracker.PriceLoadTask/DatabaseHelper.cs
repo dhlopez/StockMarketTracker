@@ -22,9 +22,13 @@ namespace StockMarketTracker.PriceLoadTask
 
         //have tickers with empty price in database, empty last updated, or last updated > 1 hour
         //read from database to get first 5 where price is empty - EF
-        public List<Ticker> GetTickerList()
+        public List<Ticker> GetTickerList(bool excludeCanadianTickers)
         {
-            return tickerRepository.GetAll().Where(t=>t.DateLastUpdated < (DateTime.Now.AddHours(-1))).Take(5).ToList();
+            if(excludeCanadianTickers)
+                return tickerRepository.GetAll().Where(t=>t.DateLastUpdated < (DateTime.Now.AddHours(-1)) 
+                    && t.SkipPriceUpdate.Equals(false)).Take(5).ToList();
+
+            return tickerRepository.GetAll().Where(t => t.DateLastUpdated < (DateTime.Now.AddHours(-1))).Take(5).ToList();
         }
 
         //update the database with those 5 prices - EF
